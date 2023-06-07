@@ -1,6 +1,6 @@
 import $api from "../http"
 import { AxiosResponse } from "axios"
-import { AuthResponse } from "../models/models/AuthResponse"
+import {AuthResponse, RoleResponse} from "../models/models/AuthResponse"
 
 export default class AuthService {
     static async login(
@@ -12,13 +12,19 @@ export default class AuthService {
 
     static async registration(
         email: string,
-        password: string
+        password: string,
+        fullName: string,
+        role: string
     ): Promise<AxiosResponse<AuthResponse>> {
-        return $api.post<AuthResponse>("/auth/registration", { email, password })
+        return $api.post<AuthResponse>("/auth/registration", { email, password, fullName, role })
     }
 
     static async logout(): Promise<void> {
         return $api.post("/auth/logout", {}, { withCredentials: true })
+    }
+
+    static async getAllRoles(): Promise<AxiosResponse<RoleResponse>> {
+        return $api.get("/role/getAll")
     }
 
 }
