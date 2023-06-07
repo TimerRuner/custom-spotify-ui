@@ -3,7 +3,7 @@ import {useTypeSelector} from "../hooks/useSelector";
 import {useActions} from "../hooks/actionCreator";
 import {useRouter} from "next/router";
 import {ErrorMessage, Field, Form, Formik} from "formik";
-import {Text, Box, Button, Flex, FormControl, FormLabel, Input, Link} from "@chakra-ui/react";
+import {Text, Box, Button, Flex, FormControl, FormLabel, Input, Link, Heading} from "@chakra-ui/react";
 import Cookies from 'js-cookie';
 import getGoogleUrl from "../utils/getGoogleUrl";
 
@@ -46,7 +46,8 @@ const LoginForm: FC = () => {
 
     return (
         <Box width="100vw" height="100vh">
-            <Flex width="100%" height="100%" justifyContent="center" alignItems="center">
+            <Flex width="100%" height="100%" justifyContent="center" alignItems="center" flexDirection="column">
+                <Heading mb="25px">Login Page</Heading>
                 <Box width="336px" height="auto">
                     <Formik
                         initialValues={{ email: "", password: ""}}
@@ -69,8 +70,9 @@ const LoginForm: FC = () => {
                                     <Field type="password" as={Input} name="password" palceholder="Enter password"/>
                                     <ErrorMessage name="password" render={msg => <Text color="red">{msg}</Text>}/>
                                 </FormControl>
-                                <Flex gap="15px" justifyContent="space-around">
+                                <Flex gap="15px" justifyContent="space-around" alignItems="center">
                                     <Button type="submit" minW="150px">Login</Button>
+                                    <Button><Link href="signup" minW="150px">Sign up</Link></Button>
                                 </Flex>
                                 <Button gap="15px" mt={5} onClick={() => router.push(getGoogleUrl())}>
                                     Google

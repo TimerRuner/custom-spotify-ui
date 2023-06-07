@@ -1668,6 +1668,11 @@
   dependencies:
     "esutils" "^2.0.2"
 
+"dotenv@^16.1.4":
+  "integrity" "sha512-m55RtE8AsPeJBpOIFKihEmqUcoVncQIwo7x9U8ZwLEZw9ZpXboz2c+rvog+jUaJvVrZ5kBOeYQBX5+8Aa/OZQw=="
+  "resolved" "https://registry.npmjs.org/dotenv/-/dotenv-16.1.4.tgz"
+  "version" "16.1.4"
+
 "emoji-regex@^9.2.2":
   "integrity" "sha512-L18DaJsXSUk2+42pv8mLs5jJT2hqFkFE4j21wOmgbUqsZ2hL72NsUU785g9RXgo3s0ZNgVl42TiHp3ZtOv/Vyg=="
   "resolved" "https://registry.npmjs.org/emoji-regex/-/emoji-regex-9.2.2.tgz"

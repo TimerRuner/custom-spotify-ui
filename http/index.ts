@@ -1,9 +1,8 @@
-//! модуль для роботи із axios і запитами на сервер
 import axios from "axios"
 import { AuthResponse } from "../models/models/AuthResponse"
 
 //todo env file
-export const API_URL = `http://localhost:5000/api`
+export const API_URL = process.env.NEXT_PUBLIC_SERVER_ORIGIN
 
 const $api = axios.create({
     withCredentials: true,

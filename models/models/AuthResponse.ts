@@ -5,3 +5,9 @@ export interface AuthResponse {
     refreshToken: string
     user: IUser
 }
+
+export interface RoleResponse {
+    id: number,
+    description: string,
+    value: string
+}

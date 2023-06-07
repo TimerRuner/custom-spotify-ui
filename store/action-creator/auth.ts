@@ -45,12 +45,12 @@ export const loginGoogle = (accessToken: string, user: IUser) => {
     }
 }
 
-export const registration = (email: string, password: string) => {
+export const registration = (email: string, password: string, fullName: string, role: string) => {
     return async (dispatch: Dispatch<AuthActionTypes>) => {
         try {
             dispatch({type: AuthActionConst.SET_LOADING, payload: true})
 
-            const response = await AuthService.registration(email, password)
+            const response = await AuthService.registration(email, password, fullName, role)
             localStorage.setItem("token", response.data.accessToken)
 
             dispatch({type: AuthActionConst.SET_AUTH, payload: true})
