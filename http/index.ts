@@ -1,7 +1,6 @@
 import axios from "axios"
 import { AuthResponse } from "../models/models/AuthResponse"
 
-//todo env file
 export const API_URL = process.env.NEXT_PUBLIC_SERVER_ORIGIN
 
 const $api = axios.create({
