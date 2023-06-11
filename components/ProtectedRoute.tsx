@@ -11,6 +11,7 @@ const ProtectedRoute: FC<IProtectedRoute> = ({children}) => {
     const router = useRouter()
     const {checkAuth} = useActions()
     const {user} = useTypeSelector((store) => store.auth)
+    console.log(user)
     useEffect(() => {
         if(localStorage.getItem("token")) {
             checkAuth()

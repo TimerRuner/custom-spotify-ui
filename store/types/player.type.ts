@@ -1,4 +1,5 @@
 import {ITrack} from "./track.type";
+import {ITrackResponse} from "../../models/models/TrackResponse";
 
 export interface PlayerState {
     active: null | ITrack;
@@ -25,7 +26,7 @@ interface PauseAction {
 }
 interface SetActiveAction {
     type: PlayerActionTypes.SET_ACTIVE,
-    payload: ITrack;
+    payload: ITrackResponse;
 }
 interface SetDurationAction {
     type: PlayerActionTypes.SET_DURATION,

@@ -20,3 +20,11 @@ export interface IComment {
     createdAt: string
     updatedAt: string
 }
+
+export interface ITrackCreateDto {
+    name: string,
+    text: string,
+    artist: string,
+    picture: File,
+    audio: File
+}

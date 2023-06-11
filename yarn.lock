@@ -2959,12 +2959,12 @@
   "resolved" "https://registry.npmjs.org/natural-compare/-/natural-compare-1.4.0.tgz"
   "version" "1.4.0"
 
-"next-redux-wrapper@^8.1.0":
-  "integrity" "sha512-2hIau0hcI6uQszOtrvAFqgc0NkZegKYhBB7ZAKiG3jk7zfuQb4E7OV9jfxViqqojh3SEHdnFfPkN9KErttUKuw=="
-  "resolved" "https://registry.npmjs.org/next-redux-wrapper/-/next-redux-wrapper-8.1.0.tgz"
-  "version" "8.1.0"
+"next-redux-wrapper@^6.0.2":
+  "integrity" "sha512-I9CnIYhQwI/qEoNdc9VAPjIyuq4rFFhCTa4rKhoDHWEVHGB1DXZy8TAyGpwvWizESd8IoTI/OKlP6bFpCbXsOw=="
+  "resolved" "https://registry.npmjs.org/next-redux-wrapper/-/next-redux-wrapper-6.0.2.tgz"
+  "version" "6.0.2"
 
-"next@>=9", "next@13.4.2":
+"next@>=9.0.0", "next@13.4.2":
   "integrity" "sha512-aNFqLs3a3nTGvLWlO9SUhCuMUHVPSFQC0+tDNGAsDXqx+WJDFSbvc233gOJ5H19SBc7nw36A9LwQepOJ2u/8Kg=="
   "resolved" "https://registry.npmjs.org/next/-/next-13.4.2.tgz"
   "version" "13.4.2"
