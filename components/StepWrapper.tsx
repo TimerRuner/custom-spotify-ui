@@ -1,29 +1,50 @@
 import React from 'react';
-import {Card, Container, Grid, Step, StepLabel, Stepper} from "@material-ui/core";
+import {
+    Box, Container, Step,
+    StepDescription,
+    StepIcon,
+    StepIndicator,
+    StepNumber, Stepper,
+    StepSeparator,
+    StepStatus,
+    StepTitle, useSteps
+} from "@chakra-ui/react";
 
 interface StepWrapperProps {
-    activeStep: number;
+    step: number;
+    children: React.ReactNode
 }
-const steps = ['Информация о треке', 'Загрузите обложку', 'Загрузите сам трек']
 
-const StepWrapper: React.FC<StepWrapperProps> = ({activeStep, children}) => {
+const steps = [
+    { title: 'First', description: 'Track info' },
+    { title: 'Second', description: 'Upload poster' },
+    { title: 'Third', description: 'Upload audio' },
+]
+
+const StepWrapper: React.FC<StepWrapperProps> = ({step, children}) => {
     return (
         <Container>
-            <Stepper activeStep={activeStep}>
-                {steps.map((step, index) =>
-                    <Step
-                        key={index}
-                        completed={activeStep > index}
-                    >
-                        <StepLabel>{step}</StepLabel>
+            <Stepper index={step}>
+                {steps.map((step, index) => (
+                    <Step key={index}>
+                        <StepIndicator>
+                            <StepStatus
+                                complete={<StepIcon />}
+                                incomplete={<StepNumber />}
+                                active={<StepNumber />}
+                            />
+                        </StepIndicator>
+
+                        <Box flexShrink='0'>
+                            <StepTitle>{step.title}</StepTitle>
+                            <StepDescription>{step.description}</StepDescription>
+                        </Box>
+
+                        <StepSeparator />
                     </Step>
-                )}
+                ))}
             </Stepper>
-            <Grid container justifyContent="center" style={{margin: '70px 0 ', height: 270}}>
-                <Card style={{width: 600}}>
-                    {children}
-                </Card>
-            </Grid>
+            {children}
         </Container>
     );
 };

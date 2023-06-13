@@ -17,19 +17,6 @@ const LoginForm: FC = () => {
       }
   }, [isAuth])
 
-  useEffect(() => {
-      const refreshToken = localStorage.getItem("token")
-
-      const data = Cookies.get("user")
-      const user = JSON.parse(data || "{}")
-      if(user?.accessToken || user?.user){
-          loginGoogle(user.accessToken, user.user)
-      }
-      return () => {
-          if(!refreshToken) return Cookies.remove("user")
-      }
-  }, [])
-
     const validation = (values: {email: string, password: string}) => {
         const errors: {email?: string, password?: string} = {};
 
@@ -72,7 +59,7 @@ const LoginForm: FC = () => {
                                 </FormControl>
                                 <Flex gap="15px" justifyContent="space-around" alignItems="center">
                                     <Button type="submit" minW="150px">Login</Button>
-                                    <Button><Link href="signup" minW="150px">Sign up</Link></Button>
+                                    <Button><Link href="/signup" minW="150px">Sign up</Link></Button>
                                 </Flex>
                                 <Button gap="15px" mt={5} onClick={() => router.push(getGoogleUrl())}>
                                     Google

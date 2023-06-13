@@ -3,9 +3,8 @@ import { AxiosResponse } from "axios"
 import {IComment, ITrackResponse} from "../models/models/TrackResponse";
 
 export default class TrackService {
-    //todo add queries offset and limit
-    static async fetchTracks(): Promise<AxiosResponse<ITrackResponse[]>> {
-        return $api.get<ITrackResponse[]>("/track/all")
+    static async fetchTracks(offset: number = 0, limit: number = 10): Promise<AxiosResponse<ITrackResponse[]>> {
+        return $api.get<ITrackResponse[]>(`/track/all?offset=${offset}&limit=${limit}`)
     }
 
     static async createTrack(dto: any): Promise<AxiosResponse<ITrackResponse>> {
@@ -14,6 +13,10 @@ export default class TrackService {
 
     static async getTrackById(id: string | string[]): Promise<AxiosResponse<ITrackResponse>> {
         return $api.get(`/track/${id}`)
+    }
+
+    static async deleteTrackById(id: number): Promise<void> {
+        return $api.delete(`/track/delete/${id}`)
     }
 
     static async createComment(

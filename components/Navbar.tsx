@@ -19,6 +19,7 @@ import {BurgerIcon} from "../icons/BurgerIcon";
 import {useActions} from "../hooks/actionCreator";
 import {ERoutes} from "../models/constants/routes";
 import {EColor} from "../models/colors/colors";
+import Cookies from "js-cookie";
 
 
 const menuItems = [
@@ -31,6 +32,11 @@ export default function Navbar() {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const router = useRouter()
     const {logout} = useActions()
+    const logoutHandler = () => {
+        logout()
+        const accessToken = localStorage.getItem("token")
+        if(!accessToken) return Cookies.remove("user")
+    }
     return (
         <Box bg={EColor.green}>
             <Menu>
@@ -46,7 +52,7 @@ export default function Navbar() {
                         }
                         variant='outline'
                     />
-                    <Button bg={EColor.greenLight}  onClick={() => logout()}>Logout</Button>
+                    <Button bg={EColor.greenLight}  onClick={logoutHandler}>Logout</Button>
                 </Flex>
             </Menu>
             <Drawer placement="left" isOpen={isOpen} onClose={onClose}>

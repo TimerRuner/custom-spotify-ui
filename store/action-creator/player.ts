@@ -1,5 +1,4 @@
 import {PlayerAction, PlayerActionTypes} from "../types/player.type";
-import {ITrack} from "../types/track.type";
 import {ITrackResponse} from "../../models/models/TrackResponse";
 
 

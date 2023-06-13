@@ -1,5 +1,5 @@
 import {Dispatch} from "react";
-import {ITrackMeta, TrackAction, TrackActionTypes} from "../types/track.type";
+import {TrackAction, TrackActionTypes} from "../types/track.type";
 import TrackService from "../../services/TrackService";
 
 export const fetchTracks = () => {
@@ -14,8 +14,4 @@ export const fetchTracks = () => {
             })
         }
     }
-}
-
-export const setCurrentTrackMeta = (payload: ITrackMeta): TrackAction => {
-    return {type: TrackActionTypes.ADD_CURRENT_TRACK_META, payload}
 }

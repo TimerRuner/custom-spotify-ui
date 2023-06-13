@@ -1,9 +1,10 @@
 import React from 'react';
 import Navbar from "../components/Navbar";
-import { Container } from '@chakra-ui/react'
+import {Container, Spinner} from '@chakra-ui/react'
 import Player from "../components/Player";
 import Head from "next/head";
 import {EColor} from "../models/colors/colors";
+import {useTypeSelector} from "../hooks/useSelector";
 
 interface MainLayoutProps {
     title?: string;
@@ -20,6 +21,7 @@ const MainLayout: React.FC<MainLayoutProps>
             keywords
        }) => {
 
+    const {active} = useTypeSelector(store => store.player)
     return (
         <>
             <Head>
@@ -30,10 +32,10 @@ const MainLayout: React.FC<MainLayoutProps>
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
             </Head>
             <Navbar/>
-            <Container bg={EColor.green} maxW="100vw" height="calc(100vh - 72px)" style={{padding: '90px 0'}}>
+            <Container overflow="hidden" overflowY="auto" bg={EColor.green} maxW="100vw" minHeight="calc(100vh - 72px)" style={{padding: '90px 0'}}>
                 {children}
             </Container>
-            <Player/>
+            {active ? <Player/> : null}
         </>
     );
 };

@@ -10,7 +10,6 @@ import {useTypeSelector} from "../../hooks/useSelector";
 
 const TrackPage = ({serverTrack}) => {
     const [track, setTrack] = useState<ITrack>(serverTrack)
-    const {meta} = useTypeSelector(store => store.track)
     const router = useRouter()
     const username = useInput('')
     const text = useInput('')
@@ -41,7 +40,7 @@ const TrackPage = ({serverTrack}) => {
                 К списку
             </Button>
             <Flex style={{margin: '20px 0'}}>
-                <img src={meta.trackPicture} width={200} height={200}/>
+                <img src={track.picture} width={200} height={200}/>
                 <Box style={{marginLeft: 30}}>
                     <Heading as="h1">Track name - {track.name}</Heading>
                     <Heading as="h1">Artist - {track.artist}</Heading>

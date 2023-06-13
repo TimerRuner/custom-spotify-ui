@@ -12,21 +12,15 @@ export interface ITrack {
     albomId: any
     comments: IComment[]
 }
-export interface ITrackMeta {
-    trackPicture: string
-    trackAudio: string
-}
 
 export interface TrackState {
     tracks: ITrackResponse[];
-    meta: ITrackMeta
     error: string;
 }
 
 export enum TrackActionTypes {
     FETCH_TRACKS = 'FETCH_TRACKS',
     FETCH_TRACKS_ERROR = 'FETCH_TRACKS_ERROR',
-    ADD_CURRENT_TRACK_META='ADD_CURRENT_TRACK_META'
 }
 
 interface FetchTracksAction {
@@ -39,9 +33,4 @@ interface FetchTracksErrorAction {
     payload: string
 }
 
-interface SetTrackMeta {
-    type: TrackActionTypes.ADD_CURRENT_TRACK_META,
-    payload: ITrackMeta
-}
-
-export type TrackAction = FetchTracksAction | FetchTracksErrorAction | SetTrackMeta
+export type TrackAction = FetchTracksAction | FetchTracksErrorAction

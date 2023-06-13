@@ -15,16 +15,23 @@ interface TrackProgressProps {
     left: number;
     right: number;
     onChange: (e: number[]) => void
-    icon?: As
+    icon?: As,
+    isTranslate?: boolean
 }
 
 const TrackProgress: React.FC<TrackProgressProps> =
     ({
-         left, right, onChange, icon
+         left, right, onChange, icon, isTranslate
      }) => {
+        const viewDuration = (seconds: number): string => {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = seconds % 60;
+            return `${minutes}:${remainingSeconds}`
+        }
+
         return (
             <Flex>
-                <RangeSlider width="200px" onChangeEnd={onChange} mr={4} aria-label={['min', 'max']} min={0} max={100} step={1} defaultValue={[left, right]}>
+                <RangeSlider width="200px" onChange={onChange} mr={4} aria-label={['min', 'max']} step={1} value={[left, right]} min={0} max={right} defaultValue={[0, right]}>
                     <RangeSliderTrack bg='tomato' >
                         <RangeSliderFilledTrack bg='red.100' />
                     </RangeSliderTrack>
@@ -33,7 +40,7 @@ const TrackProgress: React.FC<TrackProgressProps> =
                     </RangeSliderThumb>
                 </RangeSlider>
                 <Flex alignItems="center">
-                    <Text>{left} / {right}</Text>
+                    {isTranslate ? <Text>{viewDuration(left)} / {viewDuration(right)}</Text> : <Text>{left} / {right}</Text>}
                 </Flex>
             </Flex>
         );

@@ -1,8 +1,7 @@
-import {ITrack} from "./track.type";
 import {ITrackResponse} from "../../models/models/TrackResponse";
 
 export interface PlayerState {
-    active: null | ITrack;
+    active: null | ITrackResponse;
     volume: number;
     duration: number;
     currentTime: number;

@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import TrackProgress from "./TrackProgress";
 import {useTypeSelector} from "../hooks/useSelector";
 import {useActions} from "../hooks/actionCreator";
-import {Box, Flex, Grid, IconButton, Text} from "@chakra-ui/react";
+import {Flex, IconButton, Text} from "@chakra-ui/react";
 import {PlayArrow, Pause, VolumeUp} from "@mui/icons-material";
 import {EColor} from "../models/colors/colors";
 import {RangeIcon} from "../icons/RangeIcon";
@@ -11,7 +11,6 @@ let audio;
 
 const Player = () => {
     const {pause, volume, active, duration, currentTime} = useTypeSelector(store => store.player)
-    const {meta} = useTypeSelector(store => store.track)
     const {pauseTrack, playTrack, setVolume, setCurrentTime, setDuration} = useActions()
 
     useEffect(() => {
@@ -19,13 +18,23 @@ const Player = () => {
             audio = new Audio()
         } else {
             setAudio()
-            play()
+            playTrack()
+            audio.play()
         }
     }, [active])
 
+    useEffect(() => {
+        if(pause) {
+            audio.pause()
+        } else {
+            audio.play()
+            setDuration(Math.ceil(audio.duration))
+        }
+    }, [pause])
+
     const setAudio = () => {
         if (active) {
-            audio.src = meta.trackAudio
+            audio.src = active.audio
             audio.volume = volume / 100
             audio.onloadedmetadata = () => {
                 setDuration(Math.ceil(audio.duration))
@@ -55,10 +64,6 @@ const Player = () => {
         setCurrentTime(Number(value[0]))
     }
 
-    if (!active) {
-        return null
-    }
-
     return (
         <Flex width="100%" roundedTopRight={6} roundedTopLeft={6} bg="black" justifyContent="space-around" align-items="center" p={4} gap={5} position="absolute" bottom={0}>
             <IconButton bg={EColor.green} aria-label='Options' onClick={play}>
@@ -71,7 +76,7 @@ const Player = () => {
                 <Text>{active?.name}</Text>
                 <Text style={{fontSize: 12, color: 'gray'}}>{active?.artist}</Text>
             </Flex>
-            <TrackProgress icon={RangeIcon} left={currentTime} right={duration} onChange={changeCurrentTime}/>
+            <TrackProgress isTranslate={true} icon={RangeIcon} left={currentTime} right={duration} onChange={changeCurrentTime}/>
             <TrackProgress icon={VolumeUp} left={volume} right={100} onChange={changeVolume}/>
         </Flex>
     );

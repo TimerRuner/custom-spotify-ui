@@ -1,5 +1,4 @@
 import React from 'react';
-import {ITrack} from "../store/types/track.type";
 import TrackItem from "./TrackItem";
 import {Box, Grid} from "@chakra-ui/react";
 import {ITrackResponse} from "../models/models/TrackResponse";
