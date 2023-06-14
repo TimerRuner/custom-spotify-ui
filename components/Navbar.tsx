@@ -7,7 +7,7 @@ import {
     DrawerContent,
     DrawerOverlay,
     Flex, Heading,
-    IconButton,
+    IconButton, Input, InputGroup, InputLeftElement,
     List,
     ListItem,
     MenuButton,
@@ -20,6 +20,8 @@ import {useActions} from "../hooks/actionCreator";
 import {ERoutes} from "../models/constants/routes";
 import {EColor} from "../models/colors/colors";
 import Cookies from "js-cookie";
+import {SearchIcon} from "@chakra-ui/icons";
+import {setSearchQuery} from "../store/action-creator/track";
 
 
 const menuItems = [
@@ -31,16 +33,22 @@ const menuItems = [
 export default function Navbar() {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const router = useRouter()
-    const {logout} = useActions()
+    const {logout, searchTracks, setSearchQuery} = useActions()
     const logoutHandler = () => {
         logout()
         const accessToken = localStorage.getItem("token")
         if(!accessToken) return Cookies.remove("user")
     }
+
+    const searchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        searchTracks(e.target.value)
+        setSearchQuery(e.target.value)
+    }
+
     return (
         <Box bg={EColor.green}>
             <Menu>
-                <Flex p={4} justifyContent="space-between" alignItems="center">
+                <Flex gap={4} p={4} justifyContent="space-between" alignItems="center">
                     <MenuButton
                         onClick={onOpen}
                         as={IconButton}
@@ -52,6 +60,12 @@ export default function Navbar() {
                         }
                         variant='outline'
                     />
+                    <InputGroup width="250px">
+                        <InputLeftElement pointerEvents="none">
+                            <SearchIcon color="gray.300" />
+                        </InputLeftElement>
+                        <Input onChange={searchHandler} bg="white" color="black" type="text" placeholder="Search..." />
+                    </InputGroup>
                     <Button bg={EColor.greenLight}  onClick={logoutHandler}>Logout</Button>
                 </Flex>
             </Menu>

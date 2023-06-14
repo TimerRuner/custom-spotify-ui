@@ -14,13 +14,20 @@ const Index = () => {
     const chakraUiTheme = extendTheme();
     const muiTheme = createTheme(chakraUiTheme);
     const router = useRouter()
-    const {tracks, error, totalCount} = useTypeSelector(state => state.track)
+    const {tracks, error, totalCount, searchQuery} = useTypeSelector(state => state.track)
     const {user} = useTypeSelector(state => state.auth)
-    const {fetchTracks} = useActions()
+    const {fetchTracks, searchTracks} = useActions()
+    const [page, setPage] = React.useState(1);
 
     useEffect(() => {
         fetchTracks()
     }, [])
+
+    useEffect(() => {
+        if(!searchQuery) {
+            setPage(1)
+        }
+    }, [searchQuery])
 
     if (error) {
         return <MainLayout>
@@ -29,10 +36,19 @@ const Index = () => {
     }
 
     const paginationHandler = (event: React.ChangeEvent<unknown>, value: number) => {
-        if(value >= 2){
-            fetchTracks((value - 1) * 5)
+        setPage(value)
+        if(searchQuery){
+            if(value >= 2){
+                searchTracks(searchQuery,(value - 1) * 5)
+            } else {
+                searchTracks(searchQuery,0)
+            }
         } else {
-            fetchTracks(0)
+            if(value >= 2){
+                fetchTracks((value - 1) * 5)
+            } else {
+                fetchTracks(0)
+            }
         }
     }
 
@@ -53,7 +69,7 @@ const Index = () => {
                                 </Flex>
                             </Box>
                             <TrackList tracks={tracks}/>
-                            <Pagination count={Math.ceil(totalCount/5)} onChange={paginationHandler}/>
+                            <Pagination count={Math.ceil(totalCount/5)} page={page} onChange={paginationHandler}/>
                         </Flex>
                     </Card>
                 </Grid>

@@ -1,6 +1,6 @@
 import $api from "../http"
 import { AxiosResponse } from "axios"
-import {IComment, ITrackResponse} from "../models/models/TrackResponse";
+import {IComment, ITrackResponse, ITracks} from "../models/models/TrackResponse";
 
 export default class TrackService {
     static async fetchTracks(offset: number = 0, limit: number = 5): Promise<AxiosResponse<ITrackResponse>> {
@@ -17,6 +17,10 @@ export default class TrackService {
 
     static async deleteTrackById(id: number): Promise<void> {
         return $api.delete(`/track/delete/${id}`)
+    }
+
+    static async searchTrack(query: string, offset: number = 0, limit: number = 5): Promise<AxiosResponse<ITrackResponse>> {
+        return $api.get(`/track/search/${query}?offset=${offset}&limit=${limit}`)
     }
 
     static async createComment(
