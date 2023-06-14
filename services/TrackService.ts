@@ -3,8 +3,8 @@ import { AxiosResponse } from "axios"
 import {IComment, ITrackResponse} from "../models/models/TrackResponse";
 
 export default class TrackService {
-    static async fetchTracks(offset: number = 0, limit: number = 10): Promise<AxiosResponse<ITrackResponse[]>> {
-        return $api.get<ITrackResponse[]>(`/track/all?offset=${offset}&limit=${limit}`)
+    static async fetchTracks(offset: number = 0, limit: number = 5): Promise<AxiosResponse<ITrackResponse>> {
+        return $api.get<ITrackResponse>(`/track/all?offset=${offset}&limit=${limit}`)
     }
 
     static async createTrack(dto: any): Promise<AxiosResponse<ITrackResponse>> {

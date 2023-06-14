@@ -1,7 +1,7 @@
-import {ITrackResponse} from "../../models/models/TrackResponse";
+import {ITrackResponse, ITracks} from "../../models/models/TrackResponse";
 
 export interface PlayerState {
-    active: null | ITrackResponse;
+    active: null | ITracks;
     volume: number;
     duration: number;
     currentTime: number;
@@ -25,7 +25,7 @@ interface PauseAction {
 }
 interface SetActiveAction {
     type: PlayerActionTypes.SET_ACTIVE,
-    payload: ITrackResponse;
+    payload: ITracks;
 }
 interface SetDurationAction {
     type: PlayerActionTypes.SET_DURATION,

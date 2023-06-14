@@ -1,10 +1,10 @@
 import React from 'react';
 import TrackItem from "./TrackItem";
 import {Box, Grid} from "@chakra-ui/react";
-import {ITrackResponse} from "../models/models/TrackResponse";
+import {ITrackResponse, ITracks} from "../models/models/TrackResponse";
 
 interface TrackListProps {
-    tracks: ITrackResponse[]
+    tracks: ITracks[]
 }
 
 const TrackList: React.FC<TrackListProps> = ({tracks}) => {

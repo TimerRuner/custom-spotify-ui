@@ -5,11 +5,11 @@ import {useActions} from "../hooks/actionCreator";
 import {useTypeSelector} from "../hooks/useSelector";
 import {Box, Card, Flex, IconButton, Spinner, Text} from "@chakra-ui/react";
 import {Delete, Pause, PlayArrow} from "@mui/icons-material";
-import {ITrackResponse} from "../models/models/TrackResponse";
+import {ITrackResponse, ITracks} from "../models/models/TrackResponse";
 import TrackService from "../services/TrackService";
 
 interface TrackItemProps {
-    track: ITrackResponse;
+    track: ITracks;
     active?: boolean;
 }
 

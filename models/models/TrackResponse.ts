@@ -1,4 +1,4 @@
-export interface ITrackResponse {
+export interface ITracks {
     id: number
     name: string
     artist: string
@@ -9,6 +9,10 @@ export interface ITrackResponse {
     userId: number
     albomId: any
     comments: Comment[]
+}
+export interface ITrackResponse {
+    tracks: ITracks[],
+    totalCount: number
 }
 
 export interface IComment {

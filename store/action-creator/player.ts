@@ -1,5 +1,5 @@
 import {PlayerAction, PlayerActionTypes} from "../types/player.type";
-import {ITrackResponse} from "../../models/models/TrackResponse";
+import {ITrackResponse, ITracks} from "../../models/models/TrackResponse";
 
 
 export const playTrack = (): PlayerAction => {
@@ -18,6 +18,6 @@ export const setVolume = (payload: number): PlayerAction => {
 export const setCurrentTime = (payload: number): PlayerAction => {
     return {type: PlayerActionTypes.SET_CURRENT_TIME, payload}
 }
-export const setActiveTrack = (payload: ITrackResponse): PlayerAction => {
+export const setActiveTrack = (payload: ITracks): PlayerAction => {
     return {type: PlayerActionTypes.SET_ACTIVE, payload}
 }

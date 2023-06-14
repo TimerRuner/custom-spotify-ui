@@ -1,4 +1,4 @@
-import {IComment, ITrackResponse} from "../../models/models/TrackResponse";
+import {IComment, ITrackResponse, ITracks} from "../../models/models/TrackResponse";
 
 export interface ITrack {
     id: number
@@ -14,18 +14,20 @@ export interface ITrack {
 }
 
 export interface TrackState {
-    tracks: ITrackResponse[];
+    tracks: ITracks[];
     error: string;
+    totalCount: number
 }
 
 export enum TrackActionTypes {
     FETCH_TRACKS = 'FETCH_TRACKS',
     FETCH_TRACKS_ERROR = 'FETCH_TRACKS_ERROR',
+    FETCH_TOTAL_COUNT = 'FETCH_TOTAL_COUNT'
 }
 
 interface FetchTracksAction {
     type: TrackActionTypes.FETCH_TRACKS;
-    payload: ITrackResponse[]
+    payload: ITracks[]
 }
 
 interface FetchTracksErrorAction {
@@ -33,4 +35,9 @@ interface FetchTracksErrorAction {
     payload: string
 }
 
-export type TrackAction = FetchTracksAction | FetchTracksErrorAction
+interface FetchTotalCount {
+    type: TrackActionTypes.FETCH_TOTAL_COUNT
+    payload: number
+}
+
+export type TrackAction = FetchTracksAction | FetchTracksErrorAction | FetchTotalCount

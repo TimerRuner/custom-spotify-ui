@@ -98,6 +98,8 @@ export const checkAuth = () => {
         } catch (error) {
             dispatch({type: AuthActionConst.SET_ERROR, payload: String(error)})
             dispatch({type: AuthActionConst.SET_AUTH, payload: false})
+            dispatch({type: AuthActionConst.SET_AUTH, payload: false})
+            dispatch({type: AuthActionConst.SET_USER, payload: null})
         } finally {
             dispatch({type: AuthActionConst.SET_LOADING, payload: false})
             dispatch({type: AuthActionConst.SET_IS_AUTH_CHECK, payload: true})
