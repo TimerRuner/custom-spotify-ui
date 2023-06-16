@@ -11,7 +11,7 @@ export default class TrackService {
         return $api.post<ITrackResponse>("/track/create", dto)
     }
 
-    static async getTrackById(id: string | string[]): Promise<AxiosResponse<ITrackResponse>> {
+    static async getTrackById(id: string | string[]): Promise<AxiosResponse<ITracks>> {
         return $api.get(`/track/${id}`)
     }
 
@@ -27,5 +27,9 @@ export default class TrackService {
       dto: {name: string, text: string, trackId: number}
     ): Promise<AxiosResponse<IComment>> {
         return $api.post("/comment/create", dto)
+    }
+
+    static async listenTrack(id: number): Promise<void> {
+        return $api.post(`/track/listen/${id}`)
     }
 }

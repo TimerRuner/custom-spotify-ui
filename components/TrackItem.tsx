@@ -24,11 +24,11 @@ const TrackItem: React.FC<TrackItemProps> = ({track}) => {
         e.stopPropagation()
         if(active && active.id !== track.id){
             setActiveTrack(track)
-            playTrack()
+            playTrack(track.id)
         } else {
             if(pause) {
                 setActiveTrack(track)
-                playTrack()
+                playTrack(track.id)
             } else {
                 pauseTrack()
             }
@@ -41,12 +41,19 @@ const TrackItem: React.FC<TrackItemProps> = ({track}) => {
         await TrackService.deleteTrackById(id).finally(() => setLoading(false))
     }
 
+    const redirectHandler = (e) => {
+        e.stopPropagation()
+        router.push('/tracks/' + track.id)
+        setActiveTrack(track)
+        pauseTrack()
+    }
+
     if(loading){
         return <Spinner size='xl' />
     }
 
     return (
-        <Card onClick={() => router.push('/tracks/' + track.id)} mb={4}>
+        <Card onClick={redirectHandler} mb={4}>
             <Flex gap={4} alignItems="center" p={4}>
                 <IconButton aria-label="content" onClick={play}>
                     {!pause && active?.id === track.id

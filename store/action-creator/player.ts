@@ -1,11 +1,14 @@
 import {PlayerAction, PlayerActionTypes} from "../types/player.type";
-import {ITrackResponse, ITracks} from "../../models/models/TrackResponse";
+import {ITracks} from "../../models/models/TrackResponse";
+import {Dispatch} from "react";
+import TrackService from "../../services/TrackService";
 
-
-export const playTrack = (): PlayerAction => {
-    return {type: PlayerActionTypes.PLAY}
+export const playTrack = (id: number) => {
+    return async (dispatch: Dispatch<PlayerAction>) => {
+        await TrackService.listenTrack(id)
+        dispatch({type: PlayerActionTypes.PLAY})
+    }
 }
-
 export const pauseTrack = (): PlayerAction => {
     return {type: PlayerActionTypes.PAUSE}
 }

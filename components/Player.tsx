@@ -6,19 +6,21 @@ import {Flex, IconButton, Text} from "@chakra-ui/react";
 import {PlayArrow, Pause, VolumeUp} from "@mui/icons-material";
 import {EColor} from "../models/colors/colors";
 import {RangeIcon} from "../icons/RangeIcon";
+import {useRouter} from "next/router";
+import {ERoutes} from "../models/constants/routes";
 
 let audio;
 
 const Player = () => {
     const {pause, volume, active, duration, currentTime} = useTypeSelector(store => store.player)
     const {pauseTrack, playTrack, setVolume, setCurrentTime, setDuration} = useActions()
-
+    const router = useRouter()
     useEffect(() => {
         if (!audio) {
             audio = new Audio()
         } else {
             setAudio()
-            playTrack()
+            playTrack(active.id)
             audio.play()
         }
     }, [active])
@@ -31,6 +33,7 @@ const Player = () => {
             setDuration(Math.ceil(audio.duration))
         }
     }, [pause])
+
 
     const setAudio = () => {
         if (active) {
@@ -45,9 +48,10 @@ const Player = () => {
         }
     }
 
-    const play = () => {
+    const play = (e) => {
+        e.stopPropagation()
         if (pause) {
-            playTrack()
+            playTrack(active.id)
             audio.play()
         } else {
             pauseTrack()
