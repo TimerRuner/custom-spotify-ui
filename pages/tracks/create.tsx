@@ -9,7 +9,7 @@ import {
     Text,
     Input,
     Button,
-    useSteps,
+    useSteps, Card, InputGroup,
 } from "@chakra-ui/react";
 import StepWrapper from "../../components/StepWrapper";
 
@@ -44,38 +44,54 @@ const Create = () => {
 
     return (
         <MainLayout>
-            <StepWrapper step={step}>
-                {step === 0 &&
-                    <Flex flexDirection={"column"} style={{padding: 20}}>
-                        <Text>Track Name</Text>
-                        <Input
-                            {...name}
-                        />
-                        <Text>Artist Name</Text>
-                        <Input
-                            {...artist}
-                        />
-                        <Text>Track Text</Text>
-                        <Input
-                            {...text}
-                        />
-                    </Flex>
-                }
-                {step === 1 &&
-                    <FileUpload setFile={setPicture} accept="image/*">
-                        <Button>Upload poster</Button>
-                    </FileUpload>
-                }
-                {step === 2 &&
-                    <FileUpload setFile={setAudio} accept="audio/*">
-                        <Button>Upload audio</Button>
-                    </FileUpload>
-                }
-                <Flex justifyContent='space-between'>
-                    <Button disabled={step === 0} onClick={back}>Back</Button>
-                    <Button onClick={next}>Next</Button>
-                </Flex>
-            </StepWrapper>
+            <Flex justifyContent="center" alignItems="center">
+                <Card width="auto" display="inline-block" p={4}>
+                    <StepWrapper step={step}>
+                        {step === 0 &&
+                            <Flex flexDirection={"column"} style={{padding: 20}}>
+                                <InputGroup mb={3}>
+                                    <Text>Track Name</Text>
+                                    <Input
+                                        {...name}
+                                    />
+                                </InputGroup>
+                                <InputGroup mb={3}>
+                                    <Text>Artist Name</Text>
+                                    <Input
+                                        {...artist}
+                                    />
+                                </InputGroup>
+                                <InputGroup>
+                                    <Text>Track Text</Text>
+                                    <Input
+                                        {...text}
+                                    />
+                                </InputGroup>
+                            </Flex>
+                        }
+                        {step === 1 &&
+                            <FileUpload setFile={setPicture} accept="image/*">
+                                <Flex alignItems="center" flexDirection="column" justifyContent="center" p={3}>
+                                    <Text color="black" mb={2}>{picture?.name}</Text>
+                                    <Button>Upload poster</Button>
+                                </Flex>
+                            </FileUpload>
+                        }
+                        {step === 2 &&
+                            <FileUpload setFile={setAudio} accept="audio/*">
+                                <Flex alignItems="center" flexDirection="column" justifyContent="center" p={3}>
+                                    <Text color="black" mb={2}>{audio?.name}</Text>
+                                    <Button>Upload audio</Button>
+                                </Flex>
+                            </FileUpload>
+                        }
+                        <Flex justifyContent='space-between'>
+                            <Button isDisabled={step === 0} onClick={back}>Back</Button>
+                            <Button onClick={next}>Next</Button>
+                        </Flex>
+                    </StepWrapper>
+                </Card>
+            </Flex>
         </MainLayout>
     );
 };

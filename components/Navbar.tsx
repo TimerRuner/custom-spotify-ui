@@ -60,19 +60,21 @@ export default function Navbar() {
                         }
                         variant='outline'
                     />
-                    <InputGroup width="250px">
-                        <InputLeftElement pointerEvents="none">
-                            <SearchIcon color="gray.300" />
-                        </InputLeftElement>
-                        <Input onChange={searchHandler} bg="white" color="black" type="text" placeholder="Search..." />
-                    </InputGroup>
+                    {router.pathname === ERoutes.TRACKS && (
+                        <InputGroup width="250px">
+                            <InputLeftElement pointerEvents="none">
+                                <SearchIcon color="gray.300" />
+                            </InputLeftElement>
+                            <Input onChange={searchHandler} bg="white" color="black" type="text" placeholder="Search..." />
+                        </InputGroup>
+                    )}
                     <Button bg={EColor.greenLight}  onClick={logoutHandler}>Logout</Button>
                 </Flex>
             </Menu>
             <Drawer placement="left" isOpen={isOpen} onClose={onClose}>
                 <DrawerOverlay />
                 <DrawerContent p={4}>
-                    <Heading mb={4} as="h2">Menu</Heading>
+                    <Heading color="black" mb={4} as="h2">Menu</Heading>
                     <List>
                         {menuItems.map(({text, href}, index) => (
                             <ListItem
@@ -82,7 +84,7 @@ export default function Navbar() {
                                 pb={3}
                                 onClick={() => router.push(href)}
                             >
-                                <Text _hover={{textDecoration: "underline"}}>{text}</Text>
+                                <Text color="black" _hover={{textDecoration: "underline"}}>{text}</Text>
                             </ListItem>
                         ))}
                     </List>
