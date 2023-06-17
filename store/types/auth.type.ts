@@ -3,14 +3,16 @@ import {IUser} from "../../models/IUser";
 export interface IAuthState {
     user: IUser
     isAuth: boolean
-    isLoading: boolean
+    isLoading: boolean,
+    isAuthChecked: boolean
 }
 
 export enum AuthActionConst {
     SET_AUTH = "SET_AUTH",
     SET_USER = "SET_USER",
     SET_LOADING = "SET_LOADING",
-    SET_ERROR = "SET_ERROR"
+    SET_ERROR = "SET_ERROR",
+    SET_IS_AUTH_CHECK = "SET_IS_AUTH_CHECK"
 }
 
 export interface AuthSetAuth {
@@ -23,6 +25,12 @@ export interface AuthSetUser {
     payload: IUser
 }
 
+
+export interface IsAuthCheck {
+    type: AuthActionConst.SET_IS_AUTH_CHECK,
+    payload: boolean
+}
+
 export interface AuthSetLoading {
     type: AuthActionConst.SET_LOADING,
     payload: boolean
@@ -33,4 +41,4 @@ export interface AuthSetError{
     payload: string
 }
 
-export type AuthActionTypes = AuthSetAuth | AuthSetLoading | AuthSetUser | AuthSetError
+export type AuthActionTypes = AuthSetAuth | AuthSetLoading | AuthSetUser | AuthSetError | IsAuthCheck

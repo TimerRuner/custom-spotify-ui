@@ -6,7 +6,6 @@ import {ErrorMessage, Field, Form, Formik} from "formik";
 import {Text, Box, Button, Flex, FormControl, FormLabel, Input, Link, Heading, Select} from "@chakra-ui/react";
 import {RoleResponse} from "../models/models/AuthResponse";
 import AuthService from "../services/AuthService";
-import Cookies from "js-cookie";
 
 const RegistrationForm: FC = () => {
   const {registration, loginGoogle} = useActions()
@@ -19,19 +18,6 @@ const RegistrationForm: FC = () => {
           router.push('/')
       }
   }, [isAuth])
-
-    useEffect(() => {
-        const refreshToken = localStorage.getItem("token")
-
-        const data = Cookies.get("user")
-        const user = JSON.parse(data || "{}")
-        if(user?.accessToken || user?.user){
-            loginGoogle(user.accessToken, user.user)
-        }
-        return () => {
-            if(!refreshToken) return Cookies.remove("user")
-        }
-    }, [])
 
   useEffect(() => {
       AuthService.getAllRoles().then((response) => {
@@ -112,7 +98,7 @@ const RegistrationForm: FC = () => {
                                         Registration
                                     </Button>
                                     <Button>
-                                        <Link href="login" minW="150px">Log in</Link>
+                                        <Link href="/login" minW="150px">Log in</Link>
                                     </Button>
                                 </Flex>
                             </Flex>

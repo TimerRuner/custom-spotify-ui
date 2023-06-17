@@ -5,6 +5,7 @@ export const initialState: IAuthState = {
     user: {} as IUser,
     isAuth: false,
     isLoading: false,
+    isAuthChecked: false
 }
 
 export const authReducer = (state: IAuthState = initialState, action: AuthActionTypes) => {
@@ -15,6 +16,8 @@ export const authReducer = (state: IAuthState = initialState, action: AuthAction
             return {...state, isLoading: action.payload}
         case AuthActionConst.SET_USER:
             return {...state, user: action.payload}
+        case AuthActionConst.SET_IS_AUTH_CHECK:
+            return {...state, isAuthChecked: action.payload}
         default: return state
     }
 }

@@ -2,6 +2,7 @@ import {FC, useEffect} from "react";
 import {useRouter} from "next/router";
 import {useTypeSelector} from "../hooks/useSelector";
 import {useActions} from "../hooks/actionCreator";
+import Cookies from "js-cookie";
 
 interface IProtectedRoute {
     children: React.ReactNode
@@ -9,16 +10,23 @@ interface IProtectedRoute {
 
 const ProtectedRoute: FC<IProtectedRoute> = ({children}) => {
     const router = useRouter()
-    const {checkAuth} = useActions()
-    const {user} = useTypeSelector((store) => store.auth)
+    const {checkAuth, loginGoogle} = useActions()
+    const {user, isAuth, isAuthChecked} = useTypeSelector((store) => store.auth)
+
     useEffect(() => {
-        if(localStorage.getItem("token")) {
-            checkAuth()
+        checkAuth()
+    }, [])
+
+    useEffect(() => {
+        const data = Cookies.get("user")
+        const user = JSON.parse(data || "{}")
+        if(user?.accessToken || user?.user){
+            loginGoogle(user.accessToken, user.user)
         }
     }, [])
 
     useEffect(() => {
-        if(!Object.keys(user).length) {
+        if(!isAuth && isAuthChecked) {
             router.push("/login")
         }
     }, [user, router.pathname])

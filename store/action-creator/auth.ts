@@ -2,9 +2,6 @@ import {Dispatch} from "react";
 import {AuthActionConst, AuthActionTypes} from "../types/auth.type";
 import AuthService from "../../services/AuthService";
 import {IUser} from "../../models/IUser";
-import axios from "axios";
-import {API_URL} from "../../http";
-import {AuthResponse} from "../../models/models/AuthResponse";
 
 export const login = (email: string, password: string) => {
     return async (dispatch: Dispatch<AuthActionTypes>) => {
@@ -90,10 +87,7 @@ export const checkAuth = () => {
         try {
             dispatch({type: AuthActionConst.SET_LOADING, payload: true})
 
-            const response = await axios.get<AuthResponse>(
-                `${API_URL}/auth/refresh`,
-                { withCredentials: true }
-            )
+            const response = await AuthService.refreshAuth()
 
             localStorage.setItem("token", response.data.accessToken)
 
@@ -103,8 +97,12 @@ export const checkAuth = () => {
 
         } catch (error) {
             dispatch({type: AuthActionConst.SET_ERROR, payload: String(error)})
+            dispatch({type: AuthActionConst.SET_AUTH, payload: false})
+            dispatch({type: AuthActionConst.SET_AUTH, payload: false})
+            dispatch({type: AuthActionConst.SET_USER, payload: null})
         } finally {
             dispatch({type: AuthActionConst.SET_LOADING, payload: false})
+            dispatch({type: AuthActionConst.SET_IS_AUTH_CHECK, payload: true})
         }
     }
 }

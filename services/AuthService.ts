@@ -27,4 +27,11 @@ export default class AuthService {
         return $api.get("/role/getAll")
     }
 
+    static async refreshAuth() {
+        return await $api.get<AuthResponse>(
+            `/auth/refresh`,
+            { withCredentials: true }
+        )
+    }
+
 }

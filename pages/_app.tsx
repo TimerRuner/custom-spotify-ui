@@ -4,7 +4,6 @@ import {wrapper} from "../store";
 import {useRouter} from "next/router";
 import ProtectedRoute from "../components/ProtectedRoute";
 import {ChakraProvider} from "@chakra-ui/react";
-import {Layout} from "../components/Layout";
 
 const publicRoutes = ["/signup", "/login"]
 
@@ -16,9 +15,7 @@ function MyApp({ Component, pageProps }: AppProps) {
               <Component {...pageProps} />
           ) : (
               <ProtectedRoute>
-                  <Layout>
-                      <Component {...pageProps} />
-                  </Layout>
+                  <Component {...pageProps} />
               </ProtectedRoute>
           )}
       </ChakraProvider>
